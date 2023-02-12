@@ -29,8 +29,16 @@ for i in range(1000):
     backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
     frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
     
-    pyrosim.Set_Motor_For_Joint(bodyIndex=robotId, jointName="Torso_BackLeg", controlMode=p.POSITION_CONTROL, targetPosition=-pi/4.0, maxForce=500)
-    pyrosim.Set_Motor_For_Joint(bodyIndex=robotId, jointName="Torso_FrontLeg", controlMode=p.POSITION_CONTROL, targetPosition=pi/4.0, maxForce=500)
+    pyrosim.Set_Motor_For_Joint(bodyIndex=robotId,
+                                jointName="Torso_BackLeg",
+                                controlMode=p.POSITION_CONTROL,
+                                targetPosition=((random.random()-0.5)*2)*(pi/2.0),
+                                maxForce=50)
+    pyrosim.Set_Motor_For_Joint(bodyIndex=robotId,
+                                jointName="Torso_FrontLeg",
+                                controlMode=p.POSITION_CONTROL,
+                                targetPosition=((random.random()-0.5)*2)*(pi/2.0),
+                                maxForce=50)
     
     time.sleep(1/60)
 
