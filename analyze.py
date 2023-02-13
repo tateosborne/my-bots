@@ -11,7 +11,12 @@ import constants as c
 # matplotlib.pyplot.legend()
 # matplotlib.pyplot.show()
 
-# motor plot
-targetAngles = numpy.load("data/targetAngles.npy")
-matplotlib.pyplot.plot(numpy.arange(len(targetAngles)), targetAngles*c.PI/4)
+# target angles for motors
+backLegTargetAngles = numpy.load("data/backLegTargetAngles.npy")
+frontLegTargetAngles = numpy.load("data/frontLegTargetAngles.npy")
+matplotlib.pyplot.plot(numpy.arange(len(backLegTargetAngles)), backLegTargetAngles, label="back leg motor values", linewidth=2)
+matplotlib.pyplot.plot(numpy.arange(len(frontLegTargetAngles)), frontLegTargetAngles, label = "front leg motor values", linewidth=2)
+matplotlib.pyplot.xlabel('Steps')
+matplotlib.pyplot.ylabel('Value in Radians')
+matplotlib.pyplot. legend ( )
 matplotlib.pyplot.show()
