@@ -14,6 +14,7 @@ class SENSOR:
     
     def get_value(self, timeStep):
         self.sensorValues[timeStep] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
-        if timeStep == c.LOOP_LENGTH - 1:
-            print(self.sensorValues)
+        
+    def save_sensor_values(self):
+        numpy.save("data/sensorValues.npy", self.sensorValues)
         
