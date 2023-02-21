@@ -1,6 +1,19 @@
 
+import pyrosim.pyrosim as pyrosim
+import numpy
+
+import constants as c
+
+
 class SENSOR:
 
-    def __init__(self):
-        pass
+    def __init__(self, linkName):
+        self.linkName = linkName
+        self.sensorValues = numpy.zeros(c.LOOP_LENGTH)
+        
     
+    def get_value(self, timeStep):
+        self.sensorValues[timeStep] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
+        if timeStep == c.LOOP_LENGTH - 1:
+            print(self.sensorValues)
+        

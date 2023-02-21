@@ -1,6 +1,7 @@
 
 import pybullet as p
 import pybullet_data
+import time
 
 import pyrosim.pyrosim as pyrosim
 import constants as c
@@ -11,9 +12,23 @@ from robot import ROBOT
 class SIMULATION:
 
     def __init__(self):
-        self.world = WORLD()
-        self.robot = ROBOT()
         self.physicsClient = p.connect(p.GUI)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(c.GRAVITY_X, c.GRAVITY_Y, c.GRAVITY_Z)
         
+        self.world = WORLD()
+        self.robot = ROBOT()
+        
+        
+    def run(self):
+        for t in range(c.LOOP_LENGTH):
+            p.stepSimulation()
+            
+            self.robot.sense(t)
+            self.robot.act(t)
+            
+            time.sleep(c.SLEEP)
+            
+    
+    def __del__(self):
+        p.disconnect()
