@@ -27,6 +27,8 @@ def generate_brain():
     pyrosim.Send_Sensor_Neuron(name = 1 , linkName = "BackLeg")
     pyrosim.Send_Sensor_Neuron(name = 2 , linkName = "FrontLeg")
     
+    pyrosim.Send_Motor_Neuron( name = 3 , jointName = "Torso_BackLeg")
+    
     pyrosim.End()
 
 create_world()
