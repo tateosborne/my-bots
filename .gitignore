@@ -1,4 +1,13 @@
 
+# pycache
 __pycache__
 pyrosim/__pycache__
+
+# robot data
 data
+
+# description files for world & robot
+body.urdf
+boxes.sdf
+brain.nndf
+world.sdf
