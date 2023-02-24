@@ -42,8 +42,4 @@ class ROBOT:
                 desiredAngle = self.nn.Get_Value_Of(neuronName)
                 for motor in self.motors:
                     self.motors[motor].set_value(desiredAngle, self.robotId)
-                print(neuronName, jointName, desiredAngle)
         
-        # for motor in self.motors:
-        #     self.motors[motor].set_value(timeStep, self.robotId)
-    
