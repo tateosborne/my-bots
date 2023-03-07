@@ -12,7 +12,7 @@ PI = numpy.pi
 
 # loop control
 LOOP_LENGTH = 1000
-SLEEP = 1/1000
+SLEEP = 1/100
 
 # robot values
 MOTOR_FORCE = 40
