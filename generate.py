@@ -39,6 +39,7 @@ def generate_brain():
     
     pyrosim.End()
 
+
 create_world()
 generate_body()
 generate_brain()
