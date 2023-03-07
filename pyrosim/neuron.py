@@ -71,7 +71,8 @@ class NEURON:
                 source_value = neurons[source].Get_Value()
                 
                 self.Allow_Presynaptic_Neuron_To_Influence_Me(synapse_weight, source_value)
-        
+                
+        self.Threshold()
         
     def Allow_Presynaptic_Neuron_To_Influence_Me(self, synapse_weight, source_value):
         

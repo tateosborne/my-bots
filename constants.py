@@ -12,10 +12,10 @@ PI = numpy.pi
 
 # loop control
 LOOP_LENGTH = 1000
-SLEEP = 1/300
+SLEEP = 1/1000
 
 # robot values
-MOTOR_FORCE = 20
+MOTOR_FORCE = 40
 AMPLITUDE = PI/4
 FREQUENCY = 10
 PHASE_OFFSET = 0
