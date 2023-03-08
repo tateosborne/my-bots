@@ -6,4 +6,8 @@ class HILL_CLIMBER:
     
     def __init__(self):
         self.parent = SOLUTION()
+        
+        
+    def evolve(self):
+        self.parent.evaluate()
     
