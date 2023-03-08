@@ -1,5 +1,4 @@
 
-import os
 from hillclimber import HILL_CLIMBER
 
 
