@@ -1,6 +1,5 @@
 
 import numpy
-
 import pyrosim.pyrosim as pyrosim
 
 
