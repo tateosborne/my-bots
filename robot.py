@@ -46,8 +46,8 @@ class ROBOT:
         stateOfLinkZero = p.getLinkState(self.robotId, 0)
         positionOfLinkZero = stateOfLinkZero[0]
         xCoordinateOfLinkZero = str(positionOfLinkZero[0])
-        f = open("data/fitness.txt", "w")
-        f.write(xCoordinateOfLinkZero)
-        f.close()
+        fitnessFile = open("data/fitness.txt", "w")
+        fitnessFile.write(xCoordinateOfLinkZero)
+        fitnessFile.close()
         exit()
         
