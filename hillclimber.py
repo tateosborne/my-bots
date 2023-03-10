@@ -33,7 +33,7 @@ class HILL_CLIMBER:
             self.parent = self.child
             
     def print_fitness(self):
-        print(f"\n\nparent fitness: {round(self.parent.fitness,4)} || child fitness: {round(self.child.fitness,4)}\n")
+        print(f"\n\nparent fitness: {self.parent.fitness} || child fitness: {self.child.fitness}\n")
         
     def show_best(self):
         self.parent.evaluate("GUI")
