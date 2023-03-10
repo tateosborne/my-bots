@@ -1,6 +1,7 @@
 
 import os
 import numpy
+import random
 import pyrosim.pyrosim as pyrosim
 
 class SOLUTION:
@@ -18,12 +19,15 @@ class SOLUTION:
         fitnessFile = open("data/fitness.txt", "r")
         self.fitness = float(fitnessFile.read())
         fitnessFile.close()
+        
+    def mutate(self):
+        randomRow = random.randint(0, 2)
+        randomColumn = random.randint(0, 1)
+        self.weights[randomRow,randomColumn] = (2 * random.random() - 1)
     
     def create_world(self):    
         pyrosim.Start_SDF("world.sdf")
-
-        pyrosim.Send_Cube(name="Box", pos=[-3.0,3,0.5] , size=[1,1,1])
-
+        
         pyrosim.End()
     
     def generate_body(self):

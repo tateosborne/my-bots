@@ -28,7 +28,6 @@ class ROBOT:
             
     def think(self, timeStep):
         self.nn.Update()
-        self.nn.Print()
             
     def prepare_to_act(self):
         for jointName in pyrosim.jointNamesToIndices:

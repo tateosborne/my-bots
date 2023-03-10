@@ -11,7 +11,7 @@ GRAVITY_Z = -9.8
 PI = numpy.pi
 
 # loop control
-LOOP_LENGTH = 1000
+LOOP_LENGTH = 10000
 SLEEP = 1/100
 
 # robot values
@@ -21,4 +21,4 @@ FREQUENCY = 10
 PHASE_OFFSET = 0
 
 # fitness
-NUMBER_OF_GENERATIONS = 2
+NUMBER_OF_GENERATIONS = 10

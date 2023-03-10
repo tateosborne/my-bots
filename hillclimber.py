@@ -19,13 +19,18 @@ class HILL_CLIMBER:
         self.spawn()
         self.mutate()
         self.child.evaluate()
+        self.print_fitness()
         self.select()
         
     def spawn(self):
         self.child = copy.deepcopy(self.parent)
     
     def mutate(self):
-        pass
+        self.child.mutate()
     
     def select(self):
-        pass
+        if self.parent.fitness > self.child.fitness:
+            self.parent = self.child
+            
+    def print_fitness(self):
+        print(f"\n\nparent fitness: {self.parent.fitness} || child fitness: {self.child.fitness}\n")

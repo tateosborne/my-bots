@@ -11,7 +11,7 @@ from robot import ROBOT
 class SIMULATION:
 
     def __init__(self):
-        self.physicsClient = p.connect(p.GUI)
+        self.physicsClient = p.connect(p.DIRECT)
         p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(c.GRAVITY_X, c.GRAVITY_Y, c.GRAVITY_Z)
@@ -28,7 +28,7 @@ class SIMULATION:
             self.robot.think(t)
             self.robot.act(t)
             
-            time.sleep(c.SLEEP)
+            # time.sleep(c.SLEEP)
             
     def get_fitness(self):
         self.robot.get_fitness()
