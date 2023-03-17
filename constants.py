@@ -22,3 +22,6 @@ PHASE_OFFSET = 0
 
 # fitness
 NUMBER_OF_GENERATIONS = 10
+
+# parallel hill climber
+POP_SIZE = 2
