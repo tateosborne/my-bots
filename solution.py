@@ -6,16 +6,17 @@ import pyrosim.pyrosim as pyrosim
 
 class SOLUTION:
     
-    def __init__(self):
+    def __init__(self, myID):
         self.weights = numpy.random.rand(3, 2)
         self.weights = 2 * self.weights - 1
+        self.myID = myID
         
     
     def evaluate(self, directOrGUI):
         self.create_world()
         self.generate_body()
         self.generate_brain()
-        os.system(f"python3 simulate.py + {directOrGUI} &")
+        os.system(f"python3 simulate.py {directOrGUI} {self.myID} &")
         fitnessFile = open("data/fitness.txt", "r")
         self.fitness = float(fitnessFile.read())
         fitnessFile.close()
@@ -42,7 +43,7 @@ class SOLUTION:
         pyrosim.End()
         
     def generate_brain(self):
-        pyrosim.Start_NeuralNetwork("brain.nndf")
+        pyrosim.Start_NeuralNetwork(f"brains/brain{self.myID}.nndf")
         
         pyrosim.Send_Sensor_Neuron(name=0, linkName="Torso")
         pyrosim.Send_Sensor_Neuron(name=1, linkName="BackLeg")
@@ -57,4 +58,7 @@ class SOLUTION:
                 pyrosim.Send_Synapse(sourceNeuronName=currentRow, targetNeuronName=currentColumn+3, weight=weight)
         
         pyrosim.End()
+        
+    def set_id(self, newID):
+        self.myID = newID
     
