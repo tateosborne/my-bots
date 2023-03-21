@@ -20,8 +20,8 @@ AMPLITUDE = PI/4
 FREQUENCY = 10
 PHASE_OFFSET = 0
 
-# fitness
-NUMBER_OF_GENERATIONS = 10
+# number of parents
+POP_SIZE = 10
 
-# parallel hill climber
-POP_SIZE = 2
+# number of generations
+NUMBER_OF_GENERATIONS = 10

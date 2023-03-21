@@ -1,6 +1,7 @@
 
 import os
 import copy
+import math
 import constants as c
 from solution import SOLUTION
 
@@ -18,19 +19,22 @@ class PARALLEL_HILL_CLIMBER:
         
         
     def evolve(self):
-        for key in self.parents:
-            self.parents[key].start_simulation("DIRECT")
-            for currentGeneration in range(c.NUMBER_OF_GENERATIONS):
+        self.evaluate(self.parents)
+        for currentGeneration in range(c.NUMBER_OF_GENERATIONS):
                 self.evolve_for_one_generation()
-        for key in self.parents:
-            self.parents[key].wait_for_simulation_to_end()
-    
+        
+    def evaluate(self, solutions):
+        for key in solutions:
+            solutions[key].start_simulation("DIRECT")
+        for key in solutions:
+            solutions[key].wait_for_simulation_to_end()
+
     def evolve_for_one_generation(self):
         self.spawn()
         self.mutate()
-        # self.child.evaluate("DIRECT")
-        # self.print_fitness()
-        # self.select()
+        self.evaluate(self.children)
+        self.print_fitness()
+        self.select()
         
     def spawn(self):
         self.children = {}
@@ -44,12 +48,23 @@ class PARALLEL_HILL_CLIMBER:
             self.children[key].mutate()
     
     def select(self):
-        if self.parent.fitness > self.child.fitness:
-            self.parent = self.child
+        for key in self.parents:
+            if self.parents[key].fitness > self.children[key].fitness:
+                self.parents[key] = self.children[key]
             
     def print_fitness(self):
-        print(f"\n\nparent fitness: {self.parent.fitness} || child fitness: {self.child.fitness}\n")
+        print("\n")
+        for key in self.parents:
+            print(f"parent fitness: {self.parents[key].fitness} || child fitness: {self.children[key].fitness}")
+        print()
         
     def show_best(self):
-        # self.parent.evaluate("GUI")
-        pass
+        curr_best = math.inf
+        best_key = -1
+        for key in self.parents:
+            if self.parents[key].fitness < curr_best:
+                curr_best = self.parents[key].fitness
+                best_key = key
+                
+        self.parents[best_key].start_simulation("GUI")
+    
