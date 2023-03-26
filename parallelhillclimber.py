@@ -53,10 +53,9 @@ class PARALLEL_HILL_CLIMBER:
                 self.parents[key] = self.children[key]
             
     def print_fitness(self):
-        print("\n")
-        for key in self.parents:
-            print(f"parent fitness: {self.parents[key].fitness} || child fitness: {self.children[key].fitness}")
         print()
+        for key in self.parents:
+            print(f"parent fitness: {self.parents[key].fitness}\t\tchild fitness: {self.children[key].fitness}")
         
     def show_best(self):
         curr_best = math.inf
