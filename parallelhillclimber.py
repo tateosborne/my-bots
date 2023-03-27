@@ -21,7 +21,9 @@ class PARALLEL_HILL_CLIMBER:
     def evolve(self):
         self.evaluate(self.parents)
         for currentGeneration in range(c.NUMBER_OF_GENERATIONS):
-                self.evolve_for_one_generation()
+            print()
+            print(f"generation {currentGeneration}")
+            self.evolve_for_one_generation()
         
     def evaluate(self, solutions):
         for key in solutions:
@@ -53,9 +55,8 @@ class PARALLEL_HILL_CLIMBER:
                 self.parents[key] = self.children[key]
             
     def print_fitness(self):
-        print()
         for key in self.parents:
-            print(f"parent fitness: {self.parents[key].fitness}\t\tchild fitness: {self.children[key].fitness}")
+            print(f"parent {key} fitness: {round(self.parents[key].fitness, 6)}\t\tchild fitness: {round(self.children[key].fitness, 6)}")
         
     def show_best(self):
         curr_best = math.inf
@@ -65,5 +66,6 @@ class PARALLEL_HILL_CLIMBER:
                 curr_best = self.parents[key].fitness
                 best_key = key
                 
+        print(f"\n\nshowing parent {best_key} with its fitness of {self.parents[best_key].fitness}\n")
         self.parents[best_key].start_simulation("GUI")
     
