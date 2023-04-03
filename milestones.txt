@@ -1,10 +1,10 @@
 Milestone #1
 ------------
-Change fitness function to maximize the z coordinate of the center link instead of minimizing the y coordinate like we did in the parallel hillclimber.
+Change fitness function to maximize the z coordinate of the center link instead of minimizing the x coordinate like we did in the parallel hillclimber.
 
-Deliverable: screenshot of robot showing it has maximized z instead of minimizing y. Since we want to move up now, not sideways, this is the first step to get the robot to change its behavior from the hillclimber modules.
+Deliverable: screenshot of robot showing it has maximized z instead of minimizing x. Since we want to move up now, not sideways, this is the first step to get the robot to change its behavior from the hillclimber modules.
 
-We should see the robot staying in its current (x,y) position and the body raised slightly.
+We should see the robot minimizing its (x,y) position and the body raised slightly above its center link which begins at z=1.
 
 Milestone #2
 ------------
