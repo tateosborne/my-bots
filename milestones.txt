@@ -1,3 +1,8 @@
+
+Tate Osborne
+CS206 Final Project
+Up, Up, and Away
+
 Milestone #1
 ------------
 Change fitness function to maximize the z coordinate of the center link instead of minimizing the x coordinate like we did in the parallel hillclimber.
