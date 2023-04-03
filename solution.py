@@ -24,7 +24,11 @@ class SOLUTION:
         while not os.path.exists(f"fitness{self.myID}.txt"):
             time.sleep(0.01)
         fitnessFile = open(f"fitness{self.myID}.txt", "r")
-        self.fitness = float(fitnessFile.read())
+        self.fitness = fitnessFile.read()
+        while self.fitness == "":
+            time.sleep(0.01)
+            self.fitness = fitnessFile.read()
+        self.fitness = float(self.fitness)
         fitnessFile.close()
         os.system(f"rm fitness{self.myID}.txt")
         

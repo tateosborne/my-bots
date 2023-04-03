@@ -11,7 +11,7 @@ GRAVITY_Z = -9.8
 PI = numpy.pi
 
 # loop control
-LOOP_LENGTH = 3000
+LOOP_LENGTH = 5000
 SLEEP = 1/5000
 
 # robot values

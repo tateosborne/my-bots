@@ -1,0 +1,20 @@
+Milestone #1
+------------
+Change fitness function to maximize the z coordinate of the center link instead of minimizing the y coordinate like we did in the parallel hillclimber.
+
+Deliverable: screenshot of robot showing it has maximized z instead of minimizing y. Since we want to move up now, not sideways, this is the first step to get the robot to change its behavior from the hillclimber modules.
+
+We should see the robot staying in its current (x,y) position and the body raised slightly.
+
+Milestone #2
+------------
+Make the robot minimize the z coordinate before the maximizing of the z coordinate.
+
+Deliverable: video of robot lowering itself before going up to maximize the z. This is important to do in order to make sure it jumps instead of just standing on its tip toes.
+
+
+Milestones #3
+-------------
+Make the robot actually jump using the momentum generated from the minimizing of the z coordinate.
+
+Deliverable: video of the robot going down and then actually jumping. This differs from milestone 2 by actually using the momentum generated from going down and using it to jump higher.
