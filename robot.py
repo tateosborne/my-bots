@@ -15,8 +15,8 @@ class ROBOT:
         self.motors = {}
         self.robotId = p.loadURDF("body.urdf")
         self.solutionID = solutionID
-        self.nn = NEURAL_NETWORK(f"brain{self.solutionID}.nndf")
-        os.system(f"rm brain{solutionID}.nndf")
+        self.nn = NEURAL_NETWORK(f"brains/brain{self.solutionID}.nndf")
+        os.system(f"rm brains/brain{solutionID}.nndf")
         pyrosim.Prepare_To_Simulate(self.robotId)
         self.prepare_to_sense()
         self.prepare_to_act()
@@ -40,7 +40,6 @@ class ROBOT:
     def act(self, timeStep):
         for neuronName in self.nn.Get_Neuron_Names():
             if self.nn.Is_Motor_Neuron(neuronName):
-                jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
                 desiredAngle = self.nn.Get_Value_Of(neuronName) * c.MOTOR_JOINT_RANGE
                 for motor in self.motors:
                     self.motors[motor].set_value(desiredAngle, self.robotId)
@@ -50,7 +49,7 @@ class ROBOT:
         basePosition = basePositionAndOrientation[0]
         zPosition = basePosition[2]
         fitnessFile = open(f"tmp{self.solutionID}.txt", "w")
-        os.system(f"mv tmp{self.solutionID}.txt fitness{self.solutionID}.txt")
+        os.system(f"mv tmp{self.solutionID}.txt fitness/fitness{self.solutionID}.txt")
         fitnessFile.write(str(zPosition))
         fitnessFile.close()
         

@@ -9,8 +9,8 @@ from solution import SOLUTION
 class PARALLEL_HILL_CLIMBER:
     
     def __init__(self):
-        os.system("rm brain*.nndf")
-        os.system("rm fitness*.txt")
+        os.system("rm brains/brain*.nndf")
+        os.system("rm fitness/fitness*.txt")
         self.parents = {}
         self.nextAvailableID = 0
         for i in range(c.POP_SIZE):
@@ -59,12 +59,13 @@ class PARALLEL_HILL_CLIMBER:
             print(f"parent {key} fitness: {round(self.parents[key].fitness, 6)}\t\tchild fitness: {round(self.children[key].fitness, 6)}")
         
     def show_best(self):
-        curr_best = math.inf
+        curr_best = 0
         best_key = -1
-        for key in self.parents:
-            if self.parents[key].fitness < curr_best:
+        for key in range(c.POP_SIZE):
+            if self.parents[key].fitness > curr_best:
                 curr_best = self.parents[key].fitness
                 best_key = key
+                
                 
         print(f"\n\nshowing parent {best_key} with its fitness of {self.parents[best_key].fitness}\n")
         self.parents[best_key].start_simulation("GUI")
