@@ -15,6 +15,7 @@ class ROBOT:
         self.motors = {}
         self.robotId = p.loadURDF("body.urdf")
         self.solutionID = solutionID
+        self.prev_pos = p.getBasePositionAndOrientation(self.robotId)[0][2]
         self.nn = NEURAL_NETWORK(f"brains/brain{self.solutionID}.nndf")
         os.system(f"rm brains/brain{solutionID}.nndf")
         pyrosim.Prepare_To_Simulate(self.robotId)
@@ -38,11 +39,26 @@ class ROBOT:
             self.motors[jointName] = MOTOR(jointName)
             
     def act(self, timeStep):
+        curr_pos = p.getBasePositionAndOrientation(self.robotId)[0][2]
+        front_and_back = [9, 10, 11, 12]
         for neuronName in self.nn.Get_Neuron_Names():
             if self.nn.Is_Motor_Neuron(neuronName):
-                desiredAngle = self.nn.Get_Value_Of(neuronName) * c.MOTOR_JOINT_RANGE
-                for motor in self.motors:
-                    self.motors[motor].set_value(desiredAngle, self.robotId)
+                jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
+                
+                if curr_pos < 0.4 or curr_pos > self.prev_pos:
+                    if neuronName in front_and_back:
+                        desiredAngle = self.nn.Get_Value_Of(neuronName) * c.MOTOR_JOINT_RANGE * -2
+                    else:
+                        desiredAngle = self.nn.Get_Value_Of(neuronName) * c.MOTOR_JOINT_RANGE * 2
+                else:
+                    if neuronName in front_and_back:
+                        desiredAngle = self.nn.Get_Value_Of(neuronName) * c.MOTOR_JOINT_RANGE * 1
+                    else:
+                        desiredAngle = self.nn.Get_Value_Of(neuronName) * c.MOTOR_JOINT_RANGE * -1
+                    
+                self.motors[jointName].set_value(desiredAngle, self.robotId)
+                    
+        self.prev_pos = curr_pos
                     
     def get_fitness(self):
         basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)

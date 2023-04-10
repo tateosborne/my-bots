@@ -17,6 +17,8 @@ Make the robot minimize the z coordinate before the maximizing of the z coordina
 
 Deliverable: video of robot lowering itself before going up to maximize the z. This is important to do in order to make sure it jumps instead of just standing on its tip toes.
 
+We should see the robot crouch slightly before jumping to maximize the z coordinate.
+
 
 Milestones #3
 -------------
