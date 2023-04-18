@@ -4,7 +4,9 @@ __pycache__
 pyrosim/__pycache__
 
 # robot data
-data
+best_brain
+brains
+fitness
 
 # description files for world & robot
 body.urdf
