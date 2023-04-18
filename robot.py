@@ -10,14 +10,16 @@ from motor import MOTOR
 
 class ROBOT:
 
-    def __init__(self, solutionID):
+    def __init__(self, solutionID, isBest):
         self.sensors = {}
         self.motors = {}
         self.robotId = p.loadURDF("body.urdf")
         self.solutionID = solutionID
         self.prev_pos = p.getBasePositionAndOrientation(self.robotId)[0][2]
-        self.nn = NEURAL_NETWORK(f"brains/brain{self.solutionID}.nndf")
-        os.system(f"rm brains/brain{solutionID}.nndf")
+        if isBest == "true":
+            self.nn = NEURAL_NETWORK(f"best_brain/brain{self.solutionID}.nndf")
+        else:
+            self.nn = NEURAL_NETWORK(f"brains/brain{self.solutionID}.nndf")
         pyrosim.Prepare_To_Simulate(self.robotId)
         self.prepare_to_sense()
         self.prepare_to_act()
@@ -59,13 +61,20 @@ class ROBOT:
                 self.motors[jointName].set_value(desiredAngle, self.robotId)
                     
         self.prev_pos = curr_pos
-                    
+
     def get_fitness(self):
         basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
         basePosition = basePositionAndOrientation[0]
+        orientation = basePositionAndOrientation[1]
+        xPosition = abs(basePosition[0])
+        yPosition = abs(basePosition[1])
         zPosition = basePosition[2]
+        xOrientation = abs(orientation[0])
+        yOrientation = abs(orientation[1])
+        zOrientation = abs(orientation[2])
+        fitness = (1-xOrientation)*(1-yOrientation)*(1-zOrientation)*(1/xPosition)*(1/yPosition)*(zPosition**2)
         fitnessFile = open(f"tmp{self.solutionID}.txt", "w")
         os.system(f"mv tmp{self.solutionID}.txt fitness/fitness{self.solutionID}.txt")
-        fitnessFile.write(str(zPosition))
+        fitnessFile.write(str(fitness))
         fitnessFile.close()
         

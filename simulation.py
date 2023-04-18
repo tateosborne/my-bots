@@ -10,7 +10,7 @@ from robot import ROBOT
 
 class SIMULATION:
 
-    def __init__(self, directOrGUI, solutionID):
+    def __init__(self, directOrGUI, solutionID, isBest):
         self.directOrGUI = directOrGUI
         if self.directOrGUI == "DIRECT":
             self.physicsClient = p.connect(p.DIRECT)
@@ -21,7 +21,7 @@ class SIMULATION:
         p.setGravity(c.GRAVITY_X, c.GRAVITY_Y, c.GRAVITY_Z)
         
         self.world = WORLD()
-        self.robot = ROBOT(solutionID)
+        self.robot = ROBOT(solutionID, isBest)
         
         
     def run(self):

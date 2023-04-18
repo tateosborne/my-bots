@@ -65,8 +65,10 @@ class PARALLEL_HILL_CLIMBER:
             if self.parents[key].fitness > curr_best:
                 curr_best = self.parents[key].fitness
                 best_key = key
-                
-                
+        
+        os.system("rm best_brain/brain*.nndf")
+        os.system(f"mv brains/brain{(c.POP_SIZE*c.NUMBER_OF_GENERATIONS) - c.POP_SIZE + best_key}.nndf best_brain/brain{(c.POP_SIZE*c.NUMBER_OF_GENERATIONS) - c.POP_SIZE + best_key}.nndf")
+        os.system(f"rm brains/brain*.nndf")
         print(f"\n\nshowing parent {best_key} with its fitness of {self.parents[best_key].fitness}\n")
         self.parents[best_key].start_simulation("GUI")
-    
+        
