@@ -54,9 +54,9 @@ class ROBOT:
                         desiredAngle = self.nn.Get_Value_Of(neuronName) * c.MOTOR_JOINT_RANGE * 2
                 else:
                     if neuronName in front_and_back:
-                        desiredAngle = self.nn.Get_Value_Of(neuronName) * c.MOTOR_JOINT_RANGE * 1
-                    else:
                         desiredAngle = self.nn.Get_Value_Of(neuronName) * c.MOTOR_JOINT_RANGE * -1
+                    else:
+                        desiredAngle = self.nn.Get_Value_Of(neuronName) * c.MOTOR_JOINT_RANGE * 1
                     
                 self.motors[jointName].set_value(desiredAngle, self.robotId)
                     
