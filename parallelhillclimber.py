@@ -17,16 +17,16 @@ class PARALLEL_HILL_CLIMBER:
         for i in range(c.POP_SIZE):
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID = self.nextAvailableID + 1
-            
-        numpy.matrix
+        columns = [0.0 for i in range(c.POP_SIZE)]
+        self.fitnessMatrix = numpy.matrix([columns for i in range(c.NUMBER_OF_GENERATIONS)])
         
-        
+
     def evolve(self):
         self.evaluate(self.parents)
         for currentGeneration in range(c.NUMBER_OF_GENERATIONS):
             print()
             print(f"generation {currentGeneration}")
-            self.evolve_for_one_generation()
+            self.evolve_for_one_generation(currentGeneration)
         
     def evaluate(self, solutions):
         for key in solutions:
@@ -34,12 +34,12 @@ class PARALLEL_HILL_CLIMBER:
         for key in solutions:
             solutions[key].wait_for_simulation_to_end()
 
-    def evolve_for_one_generation(self):
+    def evolve_for_one_generation(self, currentGeneration):
         self.spawn()
         self.mutate()
         self.evaluate(self.children)
         self.print_fitness()
-        self.select()
+        self.select(currentGeneration)
         
     def spawn(self):
         self.children = {}
@@ -52,10 +52,11 @@ class PARALLEL_HILL_CLIMBER:
         for key in self.children:
             self.children[key].mutate()
     
-    def select(self):
+    def select(self, currentGeneration=0):
         for key in self.parents:
             if self.parents[key].fitness < self.children[key].fitness:
                 self.parents[key] = self.children[key]
+            self.fitnessMatrix[currentGeneration, key] = self.parents[key].fitness
             
     def print_fitness(self):
         for key in self.parents:
@@ -74,4 +75,5 @@ class PARALLEL_HILL_CLIMBER:
         os.system(f"rm brains/brain*.nndf")
         print(f"\n\nshowing parent {best_key} with its fitness of {self.parents[best_key].fitness}\n")
         self.parents[best_key].start_simulation("GUI")
+        numpy.save("fitness_matrix.npy", self.fitnessMatrix)
         
