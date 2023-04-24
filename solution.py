@@ -22,11 +22,11 @@ class SOLUTION:
     
     def wait_for_simulation_to_end(self):
         while not os.path.exists(f"fitness/fitness{self.myID}.txt"):
-            time.sleep(0.01)
+            time.sleep(0.1)
         fitnessFile = open(f"fitness/fitness{self.myID}.txt", "r")
         self.fitness = fitnessFile.read()
         while self.fitness == "":
-            time.sleep(0.01)
+            time.sleep(0.1)
             self.fitness = fitnessFile.read()
         self.fitness = float(self.fitness)
         fitnessFile.close()
