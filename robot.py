@@ -63,18 +63,25 @@ class ROBOT:
         self.prev_pos = curr_pos
 
     def get_fitness(self):
+        # basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
+        # basePosition = basePositionAndOrientation[0]
+        # orientation = basePositionAndOrientation[1]
+        # xPosition = abs(basePosition[0])
+        # yPosition = abs(basePosition[1])
+        # zPosition = basePosition[2]
+        # xOrientation = abs(orientation[0])
+        # yOrientation = abs(orientation[1])
+        # zOrientation = abs(orientation[2])
+        # fitness = (1-xOrientation)*(1-yOrientation)*(1-zOrientation)*(1/xPosition)*(1/yPosition)*(zPosition**2)
+        # fitnessFile = open(f"tmp{self.solutionID}.txt", "w")
+        # os.system(f"mv tmp{self.solutionID}.txt fitness/fitness{self.solutionID}.txt")
+        # fitnessFile.write(str(fitness))
+        # fitnessFile.close()
         basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
         basePosition = basePositionAndOrientation[0]
-        orientation = basePositionAndOrientation[1]
-        xPosition = abs(basePosition[0])
-        yPosition = abs(basePosition[1])
         zPosition = basePosition[2]
-        xOrientation = abs(orientation[0])
-        yOrientation = abs(orientation[1])
-        zOrientation = abs(orientation[2])
-        fitness = (1-xOrientation)*(1-yOrientation)*(1-zOrientation)*(1/xPosition)*(1/yPosition)*(zPosition**2)
         fitnessFile = open(f"tmp{self.solutionID}.txt", "w")
         os.system(f"mv tmp{self.solutionID}.txt fitness/fitness{self.solutionID}.txt")
-        fitnessFile.write(str(fitness))
+        fitnessFile.write(str(zPosition))
         fitnessFile.close()
         

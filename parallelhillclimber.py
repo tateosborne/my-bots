@@ -2,6 +2,7 @@
 import os
 import copy
 import math
+import numpy
 import constants as c
 from solution import SOLUTION
 
@@ -16,6 +17,8 @@ class PARALLEL_HILL_CLIMBER:
         for i in range(c.POP_SIZE):
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID = self.nextAvailableID + 1
+            
+        numpy.matrix
         
         
     def evolve(self):
