@@ -24,13 +24,13 @@ class SIMULATION:
         self.robot = ROBOT(solutionID, isBest)
         
         
-    def run(self):
+    def run(self, aOrB):
         for t in range(c.LOOP_LENGTH):
             p.stepSimulation()
             
             self.robot.sense(t)
             self.robot.think(t)
-            self.robot.act(t)
+            self.robot.act(t, aOrB)
             
             if self.directOrGUI == "GUI":
                 time.sleep(c.SLEEP)

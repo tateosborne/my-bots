@@ -9,16 +9,18 @@ from solution import SOLUTION
 
 class PARALLEL_HILL_CLIMBER:
     
-    def __init__(self):
+    def __init__(self, aOrB):
         os.system("rm brains/brain*.nndf")
         os.system("rm fitness/fitness*.txt")
         self.parents = {}
         self.nextAvailableID = 0
         for i in range(c.POP_SIZE):
-            self.parents[i] = SOLUTION(self.nextAvailableID)
+            self.parents[i] = SOLUTION(self.nextAvailableID, aOrB)
             self.nextAvailableID = self.nextAvailableID + 1
         columns = [0.0 for i in range(c.POP_SIZE)]
-        self.fitnessMatrix = numpy.matrix([columns for i in range(c.NUMBER_OF_GENERATIONS)])
+        self.fitnessMatrixA = numpy.matrix([columns for i in range(c.NUMBER_OF_GENERATIONS)])
+        self.fitnessMatrixB = numpy.matrix([columns for i in range(c.NUMBER_OF_GENERATIONS)])
+        self.aOrB = aOrB
         
 
     def evolve(self):
@@ -30,7 +32,7 @@ class PARALLEL_HILL_CLIMBER:
         
     def evaluate(self, solutions):
         for key in solutions:
-            solutions[key].start_simulation("DIRECT")
+            solutions[key].start_simulation("DIRECT", self.aOrB)
         for key in solutions:
             solutions[key].wait_for_simulation_to_end()
 
@@ -56,7 +58,10 @@ class PARALLEL_HILL_CLIMBER:
         for key in self.parents:
             if self.parents[key].fitness < self.children[key].fitness:
                 self.parents[key] = self.children[key]
-            self.fitnessMatrix[currentGeneration, key] = self.parents[key].fitness
+            if self.aOrB == "A":
+                self.fitnessMatrixA[currentGeneration,key] = self.parents[key].fitness
+            else:
+                self.fitnessMatrixB[currentGeneration,key] = self.parents[key].fitness
             
     def print_fitness(self):
         for key in self.parents:
@@ -74,6 +79,6 @@ class PARALLEL_HILL_CLIMBER:
         os.system(f"mv brains/brain{(c.POP_SIZE*c.NUMBER_OF_GENERATIONS) - c.POP_SIZE + best_key}.nndf best_brain/brain{(c.POP_SIZE*c.NUMBER_OF_GENERATIONS) - c.POP_SIZE + best_key}.nndf")
         os.system(f"rm brains/brain*.nndf")
         print(f"\n\nshowing parent {best_key} with its fitness of {self.parents[best_key].fitness}\n")
-        self.parents[best_key].start_simulation("GUI")
-        numpy.save("fitness_matrix.npy", self.fitnessMatrix)
-        
+        self.parents[best_key].start_simulation("GUI", self.aOrB)
+        numpy.save("fitness_matrix.npy", self.fitnessMatrixA)
+        numpy.save("fitness_matrix.npy", self.fitnessMatrixB)

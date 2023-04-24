@@ -40,9 +40,9 @@ class ROBOT:
         for jointName in pyrosim.jointNamesToIndices:
             self.motors[jointName] = MOTOR(jointName)
             
-    def act(self, timeStep):
+    def act(self, timeStep, aOrB):
         curr_pos = p.getBasePositionAndOrientation(self.robotId)[0][2]
-        front_and_back = [9, 10, 11, 12]
+        front_and_back = [9, 10, 11, 12] if aOrB == "A" else [5, 6, 7, 8]
         for neuronName in self.nn.Get_Neuron_Names():
             if self.nn.Is_Motor_Neuron(neuronName):
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
@@ -63,25 +63,16 @@ class ROBOT:
         self.prev_pos = curr_pos
 
     def get_fitness(self):
-        # basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
-        # basePosition = basePositionAndOrientation[0]
-        # orientation = basePositionAndOrientation[1]
-        # xPosition = abs(basePosition[0])
-        # yPosition = abs(basePosition[1])
-        # zPosition = basePosition[2]
-        # xOrientation = abs(orientation[0])
-        # yOrientation = abs(orientation[1])
-        # zOrientation = abs(orientation[2])
-        # fitness = (1-xOrientation)*(1-yOrientation)*(1-zOrientation)*(1/xPosition)*(1/yPosition)*(zPosition**2)
-        # fitnessFile = open(f"tmp{self.solutionID}.txt", "w")
-        # os.system(f"mv tmp{self.solutionID}.txt fitness/fitness{self.solutionID}.txt")
-        # fitnessFile.write(str(fitness))
-        # fitnessFile.close()
         basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
         basePosition = basePositionAndOrientation[0]
+        orientation = basePositionAndOrientation[1]
         zPosition = basePosition[2]
+        xOrientation = abs(orientation[0])
+        yOrientation = abs(orientation[1])
+        zOrientation = abs(orientation[2])
+        fitness = (1-xOrientation)*(1-yOrientation)*(1-zOrientation)*(zPosition**2)
         fitnessFile = open(f"tmp{self.solutionID}.txt", "w")
         os.system(f"mv tmp{self.solutionID}.txt fitness/fitness{self.solutionID}.txt")
-        fitnessFile.write(str(zPosition))
+        fitnessFile.write(str(fitness))
         fitnessFile.close()
         
