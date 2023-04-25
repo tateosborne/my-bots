@@ -15,3 +15,12 @@ else:
     aOrB = input("test A or B (a / b): ")
     aOrB = aOrB.capitalize()
     os.system(f"python3 simulate.py GUI {key} true {aOrB} 2&>1 &")
+    
+# for i in range(5):
+#     phc = PARALLEL_HILL_CLIMBER("A")
+#     phc.evolve()
+#     phc.show_best(i)
+# for i in range(5):
+#     phc = PARALLEL_HILL_CLIMBER("B")
+#     phc.evolve()
+#     phc.show_best(i)

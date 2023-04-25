@@ -80,5 +80,7 @@ class PARALLEL_HILL_CLIMBER:
         os.system(f"rm brains/brain*.nndf")
         print(f"\n\nshowing parent {best_key} with its fitness of {self.parents[best_key].fitness}\n")
         self.parents[best_key].start_simulation("GUI", self.aOrB)
-        numpy.save("fitness_matrix.npy", self.fitnessMatrixA)
-        numpy.save("fitness_matrix.npy", self.fitnessMatrixB)
+        if self.aOrB == "A":
+            numpy.save(f"matrices/matrixA.npy", self.fitnessMatrixA)
+        else:
+            numpy.save(f"matrices/matrixB.npy", self.fitnessMatrixB)

@@ -7,7 +7,7 @@ pyrosim/__pycache__
 best_brain
 brains
 fitness
-fitness_matrix.npy
+matrices
 
 # description files for world & robot
 body.urdf
