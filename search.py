@@ -16,11 +16,13 @@ else:
     aOrB = aOrB.capitalize()
     os.system(f"python3 simulate.py GUI {key} true {aOrB} 2&>1 &")
     
-# for i in range(5):
+# for i in range(10):
+#     print(f"=== RUN {i} (A) ===")
 #     phc = PARALLEL_HILL_CLIMBER("A")
 #     phc.evolve()
 #     phc.show_best(i)
-# for i in range(5):
+# for i in range(10):
+#     print(f"=== RUN {i} (B) ===")
 #     phc = PARALLEL_HILL_CLIMBER("B")
 #     phc.evolve()
 #     phc.show_best(i)

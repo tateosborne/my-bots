@@ -67,7 +67,7 @@ class PARALLEL_HILL_CLIMBER:
         for key in self.parents:
             print(f"parent {key} fitness: {round(self.parents[key].fitness, 6)}\t\tchild fitness: {round(self.children[key].fitness, 6)}")
         
-    def show_best(self):
+    def show_best(self, i=0):
         curr_best = 0
         best_key = -1
         for key in range(c.POP_SIZE):
@@ -81,6 +81,6 @@ class PARALLEL_HILL_CLIMBER:
         print(f"\n\nshowing parent {best_key} with its fitness of {self.parents[best_key].fitness}\n")
         self.parents[best_key].start_simulation("GUI", self.aOrB)
         if self.aOrB == "A":
-            numpy.save(f"matrices/matrixA.npy", self.fitnessMatrixA)
+            numpy.save(f"matrices/matrixA_{i}.npy", self.fitnessMatrixA)
         else:
-            numpy.save(f"matrices/matrixB.npy", self.fitnessMatrixB)
+            numpy.save(f"matrices/matrixB_{i}.npy", self.fitnessMatrixB)
